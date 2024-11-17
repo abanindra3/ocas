@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useToast } from '@/components/ui/use-toast'
 import { AiOutlineArrowLeft, AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai'
-import CustomerDashboard from "@/components/CustomerDashboard"
+import CustomerDashboard from "@/app/dashboard/page"
 interface FavoriteItem {
   id: number
   name: string
