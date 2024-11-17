@@ -80,29 +80,33 @@
 //   )
 // }
 // app/layout.tsx
+import { ProductProvider } from '@/app/ProductContest'; // Ensure the correct path
+import { CartProvider } from '@/components/CardContext'; // Ensure this path is correct
+import { Inter } from 'next/font/google';
+import './globals.css';
 
-import { CartProvider } from '@/components/CardContext'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Food Ordering App',
   description: 'Order your favorite food items',
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <CartProvider>
-          {children}
-        </CartProvider>
+        {/* Ensure ProductProvider wraps CartProvider and all children */}
+        <ProductProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </ProductProvider>
       </body>
     </html>
-  )
+  );
 }

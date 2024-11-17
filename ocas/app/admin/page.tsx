@@ -15,7 +15,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { AiOutlineHome, AiOutlinePlus, AiOutlineEdit, AiOutlineLogout, AiOutlineStar } from 'react-icons/ai'
 import { FaLeaf, FaShoppingCart, FaComments, FaLightbulb } from 'react-icons/fa'
 import { useToast } from "@/components/ui/use-toast"
-
+import { useProductContext } from '@/app/ProductContest'
 interface Product {
   id: number
   name: string
@@ -58,8 +58,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
   initialProducts = [],
   setUserType 
 }) => {
-  const [products, setProducts] = useState<Product[]>(initialProducts)
-  const [newProduct, setNewProduct] = useState({ name: "", price: "", stock: "", isVeg: false, image: "" })
+  // const [products, setProducts] = useState<Product[]>(initialProducts)
+  const [newProduct, setNewProduct] = useState({id:"", name: "", price: "", stock: "", isVeg: false, image: "" })
   const [activeTab, setActiveTab] = useState("inventory")
   const [orders, setOrders] = useState<Order[]>([])
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([])
@@ -97,42 +97,39 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
     fetchData()
   }, [toast])
-
-  const handleAddProduct = () => {
-    if (newProduct.name && newProduct.price && newProduct.stock) {
-      const newProductData: Product = {
-        id: products.length + 1,
-        name: newProduct.name,
-        price: parseFloat(newProduct.price),
-        stock: parseInt(newProduct.stock),
-        isVeg: newProduct.isVeg,
-        rating: 0,
-        image: newProduct.image || "/api/placeholder/200/200",
-      }
-      setProducts([...products, newProductData])
-      setNewProduct({ name: "", price: "", stock: "", isVeg: false, image: "" })
-      toast({
-        title: "Product Added",
-        description: `${newProductData.name} has been added to the inventory.`,
-      })
-    }
+  const { products,  addProduct, updateStock } = useProductContext();
+// Replace handleAddProduct with:
+const handleAddProduct = () => {
+  if (newProduct.name && newProduct.price && newProduct.stock) {
+    const newProductData = {
+      id: parseInt(newProduct.id),
+      name: newProduct.name,
+      price: parseFloat(newProduct.price),
+      stock: parseInt(newProduct.stock),
+      isVeg: newProduct.isVeg,
+      rating: 0,
+      image: newProduct.image || "/api/placeholder/200/200",
+    };
+    addProduct(newProductData);
+    setNewProduct({id:"", name: "", price: "", stock: "", isVeg: false, image: "" });
+    toast({
+      title: "Product Added",
+      description: `${newProductData.name} has been added to the inventory.`,
+    });
   }
+};
 
-  const handleUpdateStock = (id: number, newStock: string) => {
-    const updatedStock = parseInt(newStock)
-    if (!isNaN(updatedStock) && updatedStock >= 0) {
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === id ? { ...product, stock: updatedStock } : product
-        )
-      )
-      toast({
-        title: "Stock Updated",
-        description: `Product stock has been updated to ${updatedStock}.`,
-      })
-    }
+// Replace handleUpdateStock with:
+const handleUpdateStock = (id: number, newStock: string) => {
+  const updatedStock = parseInt(newStock);
+  if (!isNaN(updatedStock) && updatedStock >= 0) {
+    updateStock(id, updatedStock);
+    toast({
+      title: "Stock Updated",
+      description: `Product stock has been updated to ${updatedStock}.`,
+    });
   }
-
+};
   const handleUpdateOrderStatus = (orderId: number, newStatus: 'processing' | 'dispatched' | 'delivered') => {
     setOrders((prevOrders) =>
       prevOrders.map((order) =>
@@ -153,15 +150,16 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
     )
   }
 
+
   const renderInventory = () => {
-    if (products.length === 0) {
+    if (!products || products.length === 0) {
       return (
         <div className="text-center py-8">
           <p className="text-gray-500">No products in inventory</p>
         </div>
-      )
+      );
     }
-
+  
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((product) => (
@@ -203,8 +201,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </Card>
         ))}
       </div>
-    )
-  }
+    );
+  };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
