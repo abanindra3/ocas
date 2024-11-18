@@ -80,16 +80,17 @@
 //   )
 // }
 // app/layout.tsx
-import { ProductProvider } from '@/app/ProductContest'; // Ensure the correct path
-import { CartProvider } from '@/components/CardContext'; // Ensure this path is correct
-import { Inter } from 'next/font/google';
-import './globals.css';
+import { ProductProvider } from "@/app/ProductContest"; // Ensure the correct path
+import { CartProvider } from "@/components/CardContext"; // Ensure this path is correct
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'Food Ordering App',
-  description: 'Order your favorite food items',
+  title: "Food Ordering App",
+  description: "Order your favorite food items",
 };
 
 export default function RootLayout({
@@ -98,15 +99,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        {/* Ensure ProductProvider wraps CartProvider and all children */}
-        <ProductProvider>
-          <CartProvider>
-            {children}
-          </CartProvider>
-        </ProductProvider>
-      </body>
-    </html>
+    <ClerkProvider dynamic>
+      <html lang="en">
+        <body className={inter.className}>
+          {/* Ensure ProductProvider wraps CartProvider and all children */}
+          <ProductProvider>
+            <CartProvider>{children}</CartProvider>
+          </ProductProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
