@@ -102,7 +102,6 @@ export default function RootLayout({
     <ClerkProvider dynamic>
       <html lang="en">
         <body className={inter.className}>
-          {/* Ensure ProductProvider wraps CartProvider and all children */}
           <ProductProvider>
             <CartProvider>{children}</CartProvider>
           </ProductProvider>
