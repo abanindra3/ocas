@@ -20,7 +20,7 @@ interface ProductContextType {
 
 // Initial products data with correct image paths
 const initialProducts: Product[] = [
-  { id: 1, name: "Veggie Burger", price: 45, stock: 50, isVeg: true, rating: 4.9, image: '/images/vburg.webp' },
+  { id: 1, name: "Veggie Burger", price: 45, stock: 50, isVeg: true, rating: 4.9, image: "/images/vburg.webp" },
   { id: 2, name: "Chicken Sandwich", price: 40, stock: 40, isVeg: false, rating: 5.0, image: "/images/chwich.webp" },
   { id: 3, name: "Veg Pasta", price: 40, stock: 30, isVeg: true, rating: 4.8, image: "/images/vpasta.webp" },
   { id: 4, name: "Fish Finger", price: 60, stock: 50, isVeg: false, rating: 4.6, image: '/images/ffinger.webp' },

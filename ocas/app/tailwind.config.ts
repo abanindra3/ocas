@@ -17,3 +17,20 @@ export default {
   },
   plugins: [],
 } satisfies Config;
+module.exports = {
+  theme: {
+    extend: {
+      animation: {
+        border: 'borderGlow 3s infinite',
+      },
+      keyframes: {
+        borderGlow: {
+          '0%': { borderColor: '#ff0000' },
+          '33%': { borderColor: '#00ff00' },
+          '66%': { borderColor: '#0000ff' },
+          '100%': { borderColor: '#ff0000' },
+        },
+      },
+    },
+  },
+}

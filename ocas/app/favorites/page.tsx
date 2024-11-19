@@ -18,10 +18,10 @@ interface FavoriteItem {
 }
 
 const mockFavorites: FavoriteItem[] = [
-  { id: 1, name: "Chicken Burger", price: 8.99, image: "/placeholder.svg?height=100&width=100", lastOrdered: "2024-03-10" },
-  { id: 2, name: "Veggie Wrap", price: 6.99, image: "/placeholder.svg?height=100&width=100", lastOrdered: "2024-03-08" },
-  { id: 3, name: "Caesar Salad", price: 7.99, image: "/placeholder.svg?height=100&width=100", lastOrdered: "2024-03-05" },
-  { id: 4, name: "Margherita Pizza", price: 11.99, image: "/placeholder.svg?height=100&width=100", lastOrdered: "2024-03-01" },
+  {id: 1, name: "Veggie Burger", price: 45,  image: "vburg.webp" , lastOrdered: "2024-03-10" },
+  { id: 2, name: "Chicken Sandwich", price: 40,   image: "chwich.webp" , lastOrdered: "2024-03-08" },
+  { id: 3, name: "Veg Pasta", price: 40,  image: "vpasta.webp", lastOrdered: "2024-03-05" },
+  { id: 4, name: "Fish Finger", price: 60,  image: 'ffinger.webp', lastOrdered: "2024-03-01" },
 ]
 
 export default function FavoritesAndReorders() {

@@ -38,7 +38,7 @@ export default function ProductsPage() {
   
   // Initialize products state
   const [products, setProducts] = useState<Product[]>([
-    { id: 1, name: "Veggie Burger", price: 45, stock: 50, isVeg: true, rating: 4.9, image: 'vburg.webp' },
+    { id: 1, name: "Veggie Burger", price: 45, stock: 50, isVeg: true, rating: 4.9, image: "vburg.webp" },
     { id: 2, name: "Chicken Sandwich", price: 40, stock: 40, isVeg: false, rating: 5.0, image: "chwich.webp" },
     { id: 3, name: "Veg Pasta", price: 40, stock: 30, isVeg: true, rating: 4.8, image: "vpasta.webp" },
     { id: 4, name: "Fish Finger", price: 60, stock: 50, isVeg: false, rating: 4.6, image: 'ffinger.webp' },
